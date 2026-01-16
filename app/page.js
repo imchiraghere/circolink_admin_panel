@@ -1,5 +1,16 @@
+"use client";
 import { redirect } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 
 export default function Page() {
-  redirect("/login");
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      redirect("/dashboard");
+    } else {
+      redirect("/login");
+    }
+  }, [user]);
 }

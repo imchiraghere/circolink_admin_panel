@@ -20,13 +20,11 @@ export default function DashboardPage() {
     }
   }, [user, router]);
 
-
-
   return (
     <div>
       <DashboardStats />
       <ListOfUsers />
-      <section className="flex  max-w-6xl ">
+      {/* <section className="flex  max-w-6xl ">
         <HighlyBlockedUser />
         <RecentTickets />
       </section>
@@ -34,7 +32,7 @@ export default function DashboardPage() {
       <section className="flex  max-w-6xl ">
         <TrendingArtists />
         <TrendingPosts />
-      </section>
+      </section> */}
     </div>
   );
 }

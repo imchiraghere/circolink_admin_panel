@@ -3,9 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Search, ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
 import { get_user_details, block_user, delete_user } from "@/api/admin";
 import ConfirmationModal from "../popup/ConfirmationModal";
-
 const ListOfUsers = () => {
-  const [searchTerm, setSearchTerm] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [sortOrder, setSortOrder] = useState("newest");
@@ -13,6 +11,9 @@ const ListOfUsers = () => {
   const [totalUsers, setTotalUsers] = useState(0);
   const [loading, setLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(false);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
   const [modalConfig, setModalConfig] = useState({
     isOpen: false,
     type: "danger",
@@ -23,15 +24,10 @@ const ListOfUsers = () => {
   });
   const itemsPerPage = 10;
 
-  // Debounce search input
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setSearchTerm(searchInput);
-      setCurrentPage(1);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [searchInput]);
+  const handleSearch = () => {
+    setSearchQuery(searchInput);
+    setCurrentPage(1);
+  };
 
   // Fetch users whenever page, search, or sort changes
   useEffect(() => {
@@ -41,23 +37,28 @@ const ListOfUsers = () => {
         const res = await get_user_details(
           currentPage,
           itemsPerPage,
-          searchTerm,
+          searchQuery,
           sortOrder
         );
 
         if (res?.success) {
-          setAllUsers(res.users);
-          setTotalUsers(res.total);
+          setAllUsers(res.users || []);
+          setTotalUsers(res.total || 0);
+        } else {
+          setAllUsers([]);
+          setTotalUsers(0);
         }
       } catch (error) {
         console.error("Error fetching users:", error);
+        setAllUsers([]);
+        setTotalUsers(0);
       } finally {
         setLoading(false);
       }
     };
 
     getAllUsers();
-  }, [currentPage, searchTerm, sortOrder]);
+  }, [currentPage, searchQuery, sortOrder]);
 
   const totalPages = Math.ceil(totalUsers / itemsPerPage);
 
@@ -161,7 +162,7 @@ const ListOfUsers = () => {
 
   const handleSortChange = (newSortOrder) => {
     setSortOrder(newSortOrder);
-    setCurrentPage(1);
+    setCurrentPage(1); 
   };
 
   return (
@@ -187,6 +188,7 @@ const ListOfUsers = () => {
                   className="w-full bg-gray-100 rounded px-4 py-1 text-sm 2xl:py-2 2xl:text-md pr-10 text-black placeholder-zinc-500 focus:outline-none focus:border-zinc-600"
                 />
                 <Search
+                  onClick={handleSearch}
                   className="absolute bg-primary-gradient right-3 p-[1px] rounded-sm top-1.5 2xl:top-2.5 text-white"
                   size={22}
                 />
@@ -212,7 +214,7 @@ const ListOfUsers = () => {
 
           {/* Table */}
           {!loading && (
-            <div className="overflow-x-auto rounded-md">
+            <div className="overflow-x-auto shadow-md rounded-md">
               <table className="w-full text-sm 2xl:text-md">
                 <thead>
                   <tr className="bg-primary-gradient text-white rounded-t-lg">

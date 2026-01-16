@@ -14,15 +14,16 @@ export const get_user_details = async (
   sortOrder = "newest"
 ) => {
   const queryParams = new URLSearchParams({
-    page: page.toString(),
-    limit: limit.toString(),
-    ...(search && { search: search }),
+    page,
+    limit,
+    ...(search && { search }),
     sort: sortOrder,
   }).toString();
 
   const res = await api.get(`/admin/getAllUsers?${queryParams}`, {
     withCredentials: true,
   });
+
   return res.data;
 };
 

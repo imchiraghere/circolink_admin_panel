@@ -43,7 +43,7 @@ const ConfirmationModal = ({
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 transform transition-all">
+      <div className="relative bg-primary-gradient rounded-lg shadow-xl max-w-md w-full mx-4 transform transition-all">
         {/* Close button */}
         {/* <button
           onClick={onClose}
@@ -63,17 +63,17 @@ const ConfirmationModal = ({
           </div>
 
           {/* Title */}
-          <h3 className="text-xl font-semibold text-zinc-900 mb-2">{title}</h3>
+          <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
 
           {/* Message */}
-          <p className="text-zinc-600 mb-6">{message}</p>
+          <p className="text-white mb-6">{message}</p>
 
           {/* Buttons */}
           <div className="flex gap-3">
             <button
               onClick={onClose}
               disabled={isLoading}
-              className="flex-1 px-4 py-2 border border-zinc-300 text-zinc-700 rounded-lg hover:bg-zinc-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-2 border border-zinc-300 text-white rounded-lg hover:bg-zinc-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {cancelText}
             </button>
