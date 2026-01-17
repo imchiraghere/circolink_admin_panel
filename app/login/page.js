@@ -17,7 +17,6 @@ const page = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  console.log("i am user", user);
 
   useEffect(() => {
     if (user) {
