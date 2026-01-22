@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":["file:///E:/circolink/circo_dashboard/app/dashboard/queries/page.js"],"sourcesContent":["import React from 'react'\r\n\r\nconst page = () => {\r\n  return (\r\n    <div>page</div>\r\n  )\r\n}\r\n\r\nexport default page"],"names":[],"mappings":";;;;;AAAA;;;AAEA,MAAM,OAAO;IACX,qBACE,8OAAC;kBAAI;;;;;;AAET;uCAEe"}}]
+}

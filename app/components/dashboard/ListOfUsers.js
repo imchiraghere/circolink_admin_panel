@@ -189,7 +189,7 @@ const ListOfUsers = () => {
                 />
                 <Search
                   onClick={handleSearch}
-                  className="absolute bg-primary-gradient right-3 p-[1px] rounded-sm top-1.5 2xl:top-2.5 text-white"
+                  className="absolute bg-primary-gradient right-3 p-[1] rounded-sm top-1.5 2xl:top-2.5 text-white"
                   size={22}
                 />
               </div>

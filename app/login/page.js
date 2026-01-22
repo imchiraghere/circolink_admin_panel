@@ -45,7 +45,7 @@ const page = () => {
       };
 
       const data = await login(payload);
-      console.log("response", data);
+      // console.log("response", data);
       if (!data.success) {
         throw new Error(data.message || "Login failed");
       }

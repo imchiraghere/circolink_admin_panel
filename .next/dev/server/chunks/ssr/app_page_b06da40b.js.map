@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///E:/circolink/circo_dashboard/app/page.js"],"sourcesContent":["\"use client\";\nimport { redirect } from \"next/navigation\";\nimport { useAuth } from \"@/context/AuthContext\";\nimport { useEffect } from \"react\";\n\nexport default function Page() {\n  const { user } = useAuth();\n\n  useEffect(() => {\n    if (user) {\n      redirect(\"/dashboard\");\n    } else {\n      redirect(\"/login\");\n    }\n  }, [user]);\n}\n"],"names":[],"mappings":";;;;AACA;AACA;AACA;AAHA;;;;AAKe,SAAS;IACtB,MAAM,EAAE,IAAI,EAAE,GAAG,IAAA,iIAAO;IAExB,IAAA,kNAAS,EAAC;QACR,IAAI,MAAM;YACR,IAAA,8IAAQ,EAAC;QACX,OAAO;YACL,IAAA,8IAAQ,EAAC;QACX;IACF,GAAG;QAAC;KAAK;AACX"}}]
+}

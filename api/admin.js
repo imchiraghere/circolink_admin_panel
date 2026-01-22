@@ -1,7 +1,19 @@
 import api from "@/lib/axios";
 
 export const getAllQuery = async () => {
-  const res = await api.get("/admin/getAllQuery", {
+  const res = await api.get("/getAllQuery", {
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+export const getAllGroups = async (page = 1, limit = 10, search = "") => {
+  const res = await api.get("/admin/get-all-groups", {
+    params: {
+      page,
+      limit,
+      search,
+    },
     withCredentials: true,
   });
   return res.data;
@@ -11,7 +23,7 @@ export const get_user_details = async (
   page = 1,
   limit = 10,
   search = "",
-  sortOrder = "newest"
+  sortOrder = "newest",
 ) => {
   const queryParams = new URLSearchParams({
     page,
@@ -23,7 +35,6 @@ export const get_user_details = async (
   const res = await api.get(`/admin/getAllUsers?${queryParams}`, {
     withCredentials: true,
   });
-
   return res.data;
 };
 
@@ -38,7 +49,7 @@ export const block_user = async (userId, isBlocked) => {
   const res = await api.patch(
     `/admin/block/${userId}`,
     { isBlocked },
-    { withCredentials: true }
+    { withCredentials: true },
   );
   return res.data;
 };
@@ -47,7 +58,7 @@ export const delete_user = async (userId, isDeleted) => {
   const res = await api.patch(
     `/admin/delete/${userId}`,
     { isDeleted },
-    { withCredentials: true }
+    { withCredentials: true },
   );
   return res.data;
 };
